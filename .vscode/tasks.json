@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Watch and build (only QML)",
+            "type": "shell",
+            "command": "nodemon --exec \"scp -r ./qml ./translations root@sailfish:/usr/share/discord-aos\" --watch qml --watch translations -e js,qml",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "ssh defaultuser@sailfish -- pkill -f discord-aos || true; ssh defaultuser@sailfish -t /bin/busybox bash -c /usr/bin/discord-aos",
+            "problemMatcher": []
+        }
+    ]
+}

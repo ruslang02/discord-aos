@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "**/*.cache": true,
+        "**/*.inf": true,
+        "qml/**/*.js": true,
+        "**/*.loc": true,
+        "**/*.mmp": true,
+        "**/*.pkg": true,
+        "**/*.rss": true,
+        "**/*.sis": true,
+        "**/*.user": true,
+        "moc/": true,
+        "node_modules/": true,
+        "obj/": true,
+        "Makefile": true
+    },
+    "files.eol": "\n"
+}

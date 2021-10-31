@@ -1,0 +1,17 @@
+{
+  "name": "discord-aos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:ts": "tsc -p .",
+    "watch:ts": "tsc -w -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "nodemon": "^2.0.14",
+    "typescript": "^4.4.4"
+  }
+}
