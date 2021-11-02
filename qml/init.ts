@@ -53,12 +53,10 @@ function handleReady() {
     window.client.on('debug', console.log);
     window.client.on('error', console.log);
 
-    const firstPage = Qt.createComponent("./pages/FirstPage.qml") as Qml.Page;
-    // firstPage.createObject(window);
+    const firstPage = Qt.createComponent("./pages/DirectMessagesPage.qml") as Qml.Page;
     window.initialPage = firstPage;
     window.pageStack.push(firstPage);
  
     const coverPage = Qt.createComponent("./pages/CoverPage.qml") as Qml.Page;
-    // coverPage.createObject(window);
     window.cover = coverPage;
 }
