@@ -23,10 +23,5 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
         },
     });
 
-    setInterval(() => {
-        client.ws.send({
-            op: 1,
-            d: null,
-        });
-    }, data.heartbeat_interval);
+    client.heartbeat.start(data.heartbeat_interval);
 }

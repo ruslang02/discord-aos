@@ -1,11 +1,17 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "./GuildsListPanel.js" as Js
 
 Item {
+    property var elements
     property var elementSize
     property var spacing
-    width: parent.width
     property var active: "dm"
+
+    width: parent.width
+
+    Component.onCompleted: Js.handleReady()
+
     SilicaListView {
         height: parent.height
         footer: Item { width: spacing }
@@ -35,20 +41,14 @@ Item {
         width: parent.width
         id: listView
         model: ListModel {
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&1"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&2"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&3"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&4"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&5"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&6"}
-            ListElement { url: "https://cdn.discordapp.com/avatars/708451673189777428/84db3e8b4c7a57f2b28ed6e93c697ebe.webp?size=80&7"}
+            id: listModel
         }
         delegate: Item {
             width: elementSize + spacing
             ServerPanelImageButton {
-               imageSource: url
-               onClicked: active = url
-               state: active == url ? "active" : ""
+               imageSource: icon
+               onClicked: active = icon
+               state: active == icon ? "active" : ""
             }
         }
         orientation: ListView.Horizontal

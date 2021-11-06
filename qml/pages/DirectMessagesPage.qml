@@ -9,14 +9,15 @@ Page {
     allowedOrientations: Orientation.All
 
     Component.onCompleted: Js.handleReady()
-
+    Component.onDestruction: Js.handleDestroy()
+    GlobalFlickable {
     Column {
         anchors.fill: parent
         SilicaListView {
             id: listView
             clip: true
             width: parent.width
-            height: parent.height - Theme.dp(104)
+            height: parent.height - Theme.dp(80) - Theme.paddingMedium * 2
             header: PageHeader {
                 title: qsTr("Direct Messages")
             }
@@ -25,23 +26,23 @@ Page {
             }
             delegate: ListItem {
                 menu: contextMenu
-                contentHeight: Theme.dp(104)
+                contentHeight: Theme.dp(80) + Theme.paddingMedium * 2
                 ListView.onRemove: animateRemoval(listItem)
                 CircularImage {
                     id: avatar
                     width: Theme.dp(80)
                     anchors {
                         left: parent.left
-                        leftMargin: Theme.dp(12)
+                        leftMargin: Theme.paddingMedium
                         top: parent.top
-                        topMargin: Theme.dp(12)
+                        topMargin: Theme.paddingMedium
                     }
                     source: userAvatar
                 }
                 Label {
                     anchors {
                         left: avatar.right
-                        leftMargin: Theme.dp(12)
+                        leftMargin: Theme.paddingMedium
                         top: avatar.top
                     }
                     text: userName
@@ -56,16 +57,11 @@ Page {
                 }
             }
         }
-        ServerPanel {
+        GuildsListPanel {
             elementSize: Theme.dp(80)
             height: Theme.dp(104)
-            spacing: Theme.dp(12)
+            spacing: Theme.paddingMedium
         }
     }
-
-                Button {
-                    id: loginBtn
-                    text: "Login"
-                    width: 150
-                }
+    }
 }

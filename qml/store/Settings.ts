@@ -1,17 +1,28 @@
 export const defaultSettings: Settings = {
-    token: "",
+    accounts: [], 
     debug: false,
     autoConnect: false,
+    gatewayUrl: "wss://gateway.discord.gg/?v=9&encoding=json"
 };
 
-export type Settings = {
+export interface Account {
+    id: number
     token: string
+    isDefault: boolean
+    avatar?: string
+    username?: string
+    discriminator?: string
+}
+
+export interface Settings {
+    accounts: Account[]
+    gatewayUrl: string
     debug: boolean
     autoConnect: boolean
 };
 
 export const Settings = {
-    get<K extends keyof Settings>(key: K) {
+    get<K extends keyof Settings>(key: K): Settings[K] {
         const defaultValue = defaultSettings[key];
         const type = typeof defaultValue;
         const value = window.store.get("settings")[key];

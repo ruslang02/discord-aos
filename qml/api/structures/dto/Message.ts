@@ -1,10 +1,11 @@
+import { Snowflake } from "../utils/Snowflake";
 import { MessageAttachmentDto } from "./MessageAttachment";
 import { UserDto } from "./User";
 
 export interface MessageDto {
-    id: string
-    channel_id: string
-    guild_id?: string
+    id: Snowflake
+    channel_id: Snowflake
+    guild_id?: Snowflake
     author: UserDto
     content: string
     timestamp: string

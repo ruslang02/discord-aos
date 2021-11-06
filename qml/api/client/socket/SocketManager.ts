@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Settings } from "store/Settings";
 import { Payload } from "../../structures/dto/Payload";
 import { Client } from "../Client";
 import { handlers } from "./handlers/index";
@@ -14,13 +15,13 @@ export class SocketManager {
         this.socket.statusChanged.connect(status => {
             console.log(status);
             if (status > 2) {
-                console.log(this.socket.errorString);
+                this.client.emit("disconnect", this.socket.errorString);
             }
         });
     }
 
     connect() {
-        this.socket.url = "wss://gateway.discord.gg/?v=9&encoding=json";
+        this.socket.url = Settings.get("gatewayUrl") + "&d=" + new Date().getTime();
     }
 
     ready() {
@@ -37,23 +38,9 @@ export class SocketManager {
         this.isBackground = bg;
     }
 
-    private handleBackgroundMessage = (msg: string) => {
-        if (msg.indexOf("\"op\":0") !== -1) {
-            if (msg.indexOf("\"t\":\"MESSAGE_CREATE\"") !== -1) {
-                if (msg.indexOf("\"guild_id\"") === -1 || (
-                    this.client.user && (msg.indexOf(this.client.user.id) !== -1)
-                )) {
-                    this.handleMessage(msg);
-                }
-            }
-        } else {
-            this.handleMessage(msg);
-        }
-    };
-
     private handleMessage = (msg: string) => {
         try {
-            this.client.emit("debug", "Received payload: " + msg);
+            // this.client.emit("debug", "Received payload: " + msg);
             this.handlePayload(JSON.parse(msg));
         } catch (e) {
         }

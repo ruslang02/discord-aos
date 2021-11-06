@@ -33,6 +33,13 @@ declare namespace Qt {
     declare function quit(): void;
 }
 
+declare function qsTr(id: string): string;
+
+declare namespace Theme {
+    const secondaryColor: string
+    const primaryColor: string
+}
+
 declare namespace Qml {
     interface Component {
         onCompleted: QSignal
@@ -55,11 +62,15 @@ declare namespace Qml {
         open(): void
     }
 
-    interface Dialog {
+    interface Dialog extends Page {
         accept(): void
         close(): void
         open(): void
         reject(): void
+
+        accepted: QSignal
+        opened: QSignal
+        rejected: QSignal
     }
 
     interface CommonDialog extends Dialog {
@@ -157,6 +168,18 @@ declare namespace Qml {
     interface Menu {
         open(): void
     }
+
+    interface MenuItem {
+        clicked: QSignal
+    }
+
+    interface RemorsePopup {
+        cancelText: string
+        text: string
+
+        execute(text: string, callback?: () => void, timeout?: number): void
+        trigger(): void
+    }
 }
 
 declare namespace LocalStorage {
@@ -173,6 +196,8 @@ declare interface Window extends Qml.Component, Qml.ApplicationWindow {
     client: import("./api/client/Client").Client
     store: import("./store/DatabaseStore").DatabaseStore
 }
+
+declare const remorse: Qml.RemorsePopup;
 
 const ListView: {
     Beginning: number

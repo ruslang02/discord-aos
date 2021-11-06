@@ -1,5 +1,7 @@
+import { Snowflake } from "../utils/Snowflake";
+
 export interface UserDto {
-    id: string
+    id: Snowflake
     email?: string
     discriminator: string
     username: string

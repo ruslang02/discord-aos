@@ -10,6 +10,8 @@ ApplicationWindow {
     allowedOrientations: defaultAllowedOrientations
 
     Component.onCompleted: Js.handleReady()
+
+    RemorsePopup { id: remorse }
     
     function module() {}
 

@@ -1,10 +1,11 @@
 import { Client } from "../client/Client";
 import { PrivateChannelDto } from "./dto/PrivateChannel";
+import { Snowflake } from "./utils/Snowflake";
 
 export class PrivateChannel {
-    id!: string;
+    id!: Snowflake;
     type!: number;
-    lastMessageId!: string;
+    lastMessageId!: Snowflake;
     private recipientIds: string[] = [];
 
     constructor(private client: Client, dto: PrivateChannelDto) {
